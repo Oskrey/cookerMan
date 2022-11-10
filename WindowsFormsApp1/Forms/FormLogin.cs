@@ -46,25 +46,12 @@ namespace Поварёнок
                         reader.Read();
                         DBhelper.id = (int)reader["UserID"];
                         DBhelper.idRole = (int)reader["UserRole"];
-                        string name = (string)reader["UserName"];
                         reader.Close();
-                        switch (DBhelper.idRole)
-                        {
-                            case (1):
-                                MessageBox.Show("Добро пожаловать, "+name+"!\nВаша роль: Клиент");
-                                Hide();
-                                FormProduct fp = new FormProduct();
-                                fp.ShowDialog();
-                                
-                                Show();
-                                break;
-                            case (2):
-                                MessageBox.Show("Добро пожаловать, " + name + "!\nВаша роль: Менеджер");
-                                break;
-                            case (3):
-                                MessageBox.Show("Добро пожаловать, " + name + "!\nВаша роль: Администратор");
-                                break;
-                        }
+                        Hide();
+                        FormProduct fp = new FormProduct(DBhelper.idRole);
+                        fp.ShowDialog();
+                        Show();
+                       
                     }
                     else
                     {
